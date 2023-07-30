@@ -1,54 +1,40 @@
-import  notesItems  from "./js/notes-items.js";
+import notesItems from "./js/notes-items.js";
+import editButton from "./js/editButton.js";
+import buttonRemove from "./js/buttonRemove.js";
+import buttonCreateNote from "./js/buttonCreateNote.js";
+import buttonModalCancel from "./js/buttonModalCancel.js";
+import buttonSave from "./js/buttonSave.js";
+import formModal from "./js/formModal.js";
+import createNotesItemsMarkup from "./js/createNotesItemsMarkup.js";
 
-let id = null;
 const tbody = document.querySelector(".tbody-js");
-//console.log(tbody);
+const addBtn = document.querySelector(".add");
+const cancelBtn = document.querySelector(".cancel");
+const saveBtn = document.querySelector(".save");
+const forma = document.querySelector(".container-form");
 
-
-function createNotesItemsMarkup(notes) {
-  return notes.map(({ Name, Created, Category, Content, Dates, Id }) => {
-    return `
-          <tr id="${Id}">
-            <td>${Name}</td>
-            <td>${Created}</td>
-            <td>${Category}</td>
-            <td>${Content}</td>
-            <td>${Dates}</td>
-            <td>
-              <button class="btn btn-primary edit-js">Edit</button>
-              <button class="btn btn-info save-js">Save</button>
-              <button class="btn btn-danger delete-js">Delete</button>
-            </td>
-          </tr>
-        `}).join("");
-};
 
 const NotesItemsMarkup = createNotesItemsMarkup(notesItems);
-//console.log(NotesItemsMarkup);
-tbody.insertAdjacentHTML('beforeend', NotesItemsMarkup);
+tbody.innerHTML = ''
+tbody.insertAdjacentHTML("beforeend", NotesItemsMarkup);
+
+function buttons() {
+  for (let btn of document.querySelectorAll(".btn-primary")) {
+    btn.addEventListener("click", editButton);
+  }
+  for (let btn of document.querySelectorAll(".btn-danger")) {
+    btn.addEventListener("click", buttonRemove);
+  }
+  for (let btn of document.querySelectorAll(".btn-info")) {
+    btn.addEventListener("click", buttonSave);
+    
+  }
+  addBtn.addEventListener("click", buttonCreateNote);
+  cancelBtn.addEventListener("click", buttonModalCancel);
+  forma.addEventListener("submit", formModal);
+}
+buttons();
 
 
-for (let btn of document.querySelectorAll(".edit-js")) {
-  btn.addEventListener("click", handleNoteChange)
-};
 
-for (let btn of document.querySelectorAll(".save-js")) {
-  btn.addEventListener("click", handleNoteSave)
-};
-
-for (let btn of document.querySelectorAll(".delete-js")) {
-  btn.addEventListener("click", handleNoteDelete)
-};
-
-function handleNoteChange(e) {
-  id = e.target.parentElement.parentElement.id;
-  console.log(id);
-};
-
-function handleNoteSave(e) {
-  id = e.target.parentElement.parentElement.id;
-};
-
-function handleNoteDelete (e) {
-  id = e.target.parentElement.parentElement.id;
-};
+export default buttons
