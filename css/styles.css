@@ -12,6 +12,8 @@ body {
     height: 100vh;
 }
 
+
+
 .mob-table {
     max-width: 800px;
     padding: 20px, 25px;
@@ -63,7 +65,11 @@ th {
     display: none;
 }
 
-
+.category-wrapper{
+    display: flex;
+        justify-content: center;
+        align-items: center;
+}
 .container-form.active {
     display: flex;
     justify-content: center;
@@ -84,7 +90,9 @@ th {
     padding: 20px 50px;
     border-radius: 5px;
 }
-
+input{
+    display: none;
+}
 .form-control {
     width: 90%
 }
@@ -106,4 +114,10 @@ th {
     justify-content: center;
     margin: 20px;
     gap: 100px
+}
+
+
+
+.category-item {
+    display: inline-block;
 }
